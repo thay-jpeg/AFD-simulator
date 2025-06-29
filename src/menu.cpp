@@ -71,7 +71,7 @@ void Menu::executar()
 void Menu::exibirOpcoes() const
 {
 
-    cout << string(50, '\n');
+    cout << string(50, '\n'); //limpar tela
     cout << "===========================================================" << endl;
     cout << "               AUTOMATO FINITO DETERMINISTICO          " << endl;
     cout << "===========================================================\n"
