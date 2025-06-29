@@ -1,0 +1,11 @@
+# Arquivos compilados e executáveis
+*.o
+*.exe
+bin/
+obj/
+
+# Arquivo de layout do Code::Blocks (configurações pessoais de janela)
+*.layout
+
+# Arquivos de backup do Code::Blocks
+*.cbp.save
