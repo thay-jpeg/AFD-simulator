@@ -31,7 +31,7 @@ void Menu::executar()
     do
     {
         exibirOpcoes();
-        cout << "Digite a opcao desejada:" << endl;
+        cout << "\nDigite a opcao desejada:" << endl;
         cin >> opcao;
 
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpa buffer
@@ -74,14 +74,14 @@ void Menu::exibirOpcoes() const
     cout << string(50, '\n'); //limpar tela
     cout << "===========================================================" << endl;
     cout << "               AUTOMATO FINITO DETERMINISTICO          " << endl;
-    cout << "===========================================================\n"
-         << endl;
-    cout << "\t1 - Carregar arquivo." << endl;
-    cout << "\t2 - Imprimir gramatica." << endl;
-    cout << "\t3 - Verificar palavra." << endl;
-    cout << "\t0 - Sair" << endl;
-    cout << "\n===========================================================\n"
-         << endl;
+    cout << "===========================================================" << endl;
+    cout << "|                                                         |" << endl;
+    cout << "|\t1 - Carregar arquivo                              |" << endl;
+    cout << "|\t2 - Imprimir gramatica                            |" << endl;
+    cout << "|\t3 - Verificar palavra                             |" << endl;
+    cout << "|\t0 - Sair                                          |" << endl;
+    cout << "|                                                         |" << endl;
+    cout << "===========================================================" << endl;
 }
 
 void Menu::carregarAutomato()
