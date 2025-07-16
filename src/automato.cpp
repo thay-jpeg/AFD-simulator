@@ -33,7 +33,7 @@ bool Automato::processarCadeia(const string &cadeia)
         return aceita;
     }
 
-    for (auto i = 0; i < cadeia.length(); i++)
+    for (size_t i = 0; i < cadeia.length(); i++)
     {
         cout << "[" << "q" << estadoAtual << "]" << cadeia.substr(i) << endl;
         char simbolo = cadeia[i];

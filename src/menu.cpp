@@ -2,7 +2,7 @@
 
 #include "../include/menu.h"
 // #include "../include/gerador_gramatica.h"
-// #include "../include/leitor_automato.h"
+#include "../include/leitor_automato.h"
 #include <iostream>
 #include <string>
 #include <limits> //limpar buffer cin
@@ -23,7 +23,8 @@ int Menu::vazio(Automato *automato) const
     return (automato == nullptr);
 }
 
-void Menu::executar(){
+void Menu::executar()
+{
 
     // Linhas de teste de automatos por injeçao de informaçoes
     // set<char> alfabeto = {'a', 'b', 'c', '0', '1', '2'};
@@ -58,7 +59,7 @@ void Menu::executar(){
         {
         case 1:
         {
-            // carregarAutomato();
+            carregarAutomato();
             aguardarEntrada();
             break;
         }
@@ -76,11 +77,11 @@ void Menu::executar(){
         }
         case 0:
         {
-            cout << "\nObrigado(a) por utilizar o simulador! Saindo..." << endl;
+            cout << "\nObrigado(a) por utilizar o simulador!" << endl;
             break;
         }
         default:
-            cout << "\nOpcao invalida, tente novamente!" << endl;
+            cout << "\nOpcao invalida, tente novamente." << endl;
             break;
         }
     } while (opcao != 0);
@@ -88,8 +89,7 @@ void Menu::executar(){
 
 void Menu::exibirOpcoes() const
 {
-
-    cout << string(50, '\n'); // limpar tela
+    cout << endl;
     cout << "===========================================================" << endl;
     cout << "               AUTOMATO FINITO DETERMINISTICO          " << endl;
     cout << "===========================================================" << endl;
@@ -102,31 +102,28 @@ void Menu::exibirOpcoes() const
     cout << "===========================================================" << endl;
 }
 
-// void Menu::carregarAutomato()
-// {
+void Menu::carregarAutomato()
+{
 
-//     cout << "\nDigite o nome do arquivo .txt de definicao do automato: ";
-//     string nome;
-//     getline(cin, nome);
+    cout << "\nDigite o nome do arquivo .txt de definicao do automato (deve estar na pasta 'example'): ";
+    string nome;
+    getline(cin, nome);
+    cout << endl;
 
-//     // antes de carregar um novo, libera o antigo
-//     if (!vazio(automato))
-//     {
-//         delete automato;
-//         automato = nullptr;
-//     }
+    // antes de carregar um novo, libera o antigo
+    if (!vazio(automato))
+    {
+        delete automato;
+        automato = nullptr;
+    }
 
-//     automato = leitorAutomato::lerArquivo(nome);
+    automato = leitorAutomato::lerArquivo(nome);
 
-//     if (!vazio(automato))
-//     {
-//         cout << "Automato carregado com sucesso do arquivo '" << nome << ".txt!'" << endl;
-//     }
-//     else
-//     {
-//         cout << "ERRO: Nao foi possivel carregar o arquivo do automato." << endl;
-//     }
-// }
+    if (!vazio(automato))
+    {
+        cout << "Automato carregado com sucesso do arquivo '" << nome << "'!" << endl;
+    }
+}
 
 // void Menu::imprimirGramatica() const
 // {
@@ -151,6 +148,7 @@ void Menu::verificarPalavra() const
     cout << "\nDigite a palavra a ser verificada (use @ para palavra vazia):" << endl;
     string palavra;
     getline(cin, palavra);
+    cout << endl;
 
     automato->processarCadeia(palavra);
 }
