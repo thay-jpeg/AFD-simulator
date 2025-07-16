@@ -1,30 +1,48 @@
-//Implementação
+// Implementação
 
 #include "../include/menu.h"
-#include "../include/gerador_gramatica.h"
-#include "../include/leitor_automato.h"
+// #include "../include/gerador_gramatica.h"
+// #include "../include/leitor_automato.h"
 #include <iostream>
 #include <string>
 #include <limits> //limpar buffer cin
 
 using namespace std;
 
-Menu::Menu() : m_automato(nullptr) {}
+Menu::Menu() : automato(nullptr) {}
 
 Menu::~Menu()
 {
 
     cout << "Liberando memoria de automato carregado..." << endl;
-    delete m_automato;
+    delete automato;
 }
 
-int Menu::vazio(Automato *m_automato) const
+int Menu::vazio(Automato *automato) const
 {
-    return (m_automato == nullptr);
+    return (automato == nullptr);
 }
 
-void Menu::executar()
-{
+void Menu::executar(){
+
+    // Linhas de teste de automatos por injeçao de informaçoes
+    // set<char> alfabeto = {'a', 'b', 'c', '0', '1', '2'};
+    // set<int> estados = {0, 1, 2, 3, 4, 5};
+    // map<pair<int, char>, int> transicoes = {
+    //     {{0, 'a'}, 1},
+    //     {{1, 'a'}, 2},
+    //     {{1, 'b'}, 1},
+    //     {{1, '0'}, 4},
+    //     {{2, 'c'}, 3},
+    //     {{3, 'b'}, 2},
+    //     {{3, '0'}, 5},
+    //     {{4, '0'}, 2},
+    //     {{4, '1'}, 5},
+    //     {{5, '2'}, 4},
+    // };
+    // set<int> finais = {0,2, 5};
+
+    // automato = new Automato(estados, alfabeto, transicoes, finais);
 
     int opcao;
 
@@ -40,13 +58,13 @@ void Menu::executar()
         {
         case 1:
         {
-            carregarAutomato();
+            // carregarAutomato();
             aguardarEntrada();
             break;
         }
         case 2:
         {
-            imprimirGramatica();
+            // imprimirGramatica();
             aguardarEntrada();
             break;
         }
@@ -71,7 +89,7 @@ void Menu::executar()
 void Menu::exibirOpcoes() const
 {
 
-    cout << string(50, '\n'); //limpar tela
+    cout << string(50, '\n'); // limpar tela
     cout << "===========================================================" << endl;
     cout << "               AUTOMATO FINITO DETERMINISTICO          " << endl;
     cout << "===========================================================" << endl;
@@ -84,46 +102,47 @@ void Menu::exibirOpcoes() const
     cout << "===========================================================" << endl;
 }
 
-void Menu::carregarAutomato()
+// void Menu::carregarAutomato()
+// {
+
+//     cout << "\nDigite o nome do arquivo .txt de definicao do automato: ";
+//     string nome;
+//     getline(cin, nome);
+
+//     // antes de carregar um novo, libera o antigo
+//     if (!vazio(automato))
+//     {
+//         delete automato;
+//         automato = nullptr;
+//     }
+
+//     automato = leitorAutomato::lerArquivo(nome);
+
+//     if (!vazio(automato))
+//     {
+//         cout << "Automato carregado com sucesso do arquivo '" << nome << ".txt!'" << endl;
+//     }
+//     else
+//     {
+//         cout << "ERRO: Nao foi possivel carregar o arquivo do automato." << endl;
+//     }
+// }
+
+// void Menu::imprimirGramatica() const
+// {
+//     if (vazio(automato))
+//     {
+//         cout << "\nERRO: Nenhum automato carregado. Por favor, carregue um automato primeiro." << endl;
+//         return;
+//     }
+
+//     geradorGramatica::gerar(*automato);
+// }
+
+void Menu::verificarPalavra() const
 {
 
-    cout << "\nDigite o nome do arquivo .txt de definicao do automato: ";
-    string nome;
-    getline(cin, nome);
-
-    // antes de carregar um novo, libera o antigo
-    if (!vazio(m_automato))
-    {
-        delete m_automato;
-        m_automato = nullptr;
-    }
-
-    m_automato = leitorAutomato::lerArquivo(nome);
-
-    if (!vazio(m_automato))
-    {
-        cout << "Automato carregado com sucesso do arquivo '" << nome << ".txt!'" << endl;
-    }
-    else
-    {
-        cout << "ERRO: Nao foi possivel carregar o arquivo do automato." << endl;
-    }
-}
-
-void Menu::imprimirGramatica() const
-{
-    if (vazio(m_automato))
-    {
-        cout << "\nERRO: Nenhum automato carregado. Por favor, carregue um automato primeiro." << endl;
-        return;
-    }
-
-    geradorGramatica::gerar(*m_automato);
-}
-
-void Menu::verificarPalavra() const {
-    
-    if (vazio(m_automato))
+    if (vazio(automato))
     {
         cout << "\nERRO: Nenhum automato carregado. Por favor, carregue um automato primeiro." << endl;
         return;
@@ -133,7 +152,7 @@ void Menu::verificarPalavra() const {
     string palavra;
     getline(cin, palavra);
 
-    m_automato->processarCadeia(palavra);
+    automato->processarCadeia(palavra);
 }
 
 void Menu::aguardarEntrada() const
