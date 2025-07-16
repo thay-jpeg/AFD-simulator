@@ -1,7 +1,7 @@
 // Implementação
 
 #include "../include/menu.h"
-// #include "../include/gerador_gramatica.h"
+#include "../include/gerador_gramatica.h"
 // #include "../include/leitor_automato.h"
 #include <iostream>
 #include <string>
@@ -64,7 +64,8 @@ void Menu::executar(){
         }
         case 2:
         {
-            // imprimirGramatica();
+            
+            imprimirGramatica();
             aguardarEntrada();
             break;
         }
@@ -128,16 +129,16 @@ void Menu::exibirOpcoes() const
 //     }
 // }
 
-// void Menu::imprimirGramatica() const
-// {
-//     if (vazio(automato))
-//     {
-//         cout << "\nERRO: Nenhum automato carregado. Por favor, carregue um automato primeiro." << endl;
-//         return;
-//     }
+ void Menu::imprimirGramatica() const
+{
+    if (vazio(automato))
+    {
+        cout << "\nERRO: Nenhum automato carregado. Por favor, carregue um automato primeiro." << endl;
+        return;
+    }
 
-//     geradorGramatica::gerar(*automato);
-// }
+    geradorGramatica::gerar(*automato);
+}
 
 void Menu::verificarPalavra() const
 {
