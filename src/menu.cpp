@@ -1,7 +1,7 @@
 // Implementação
 
 #include "../include/menu.h"
-// #include "../include/gerador_gramatica.h"
+#include "../include/gerador_gramatica.h"
 #include "../include/leitor_automato.h"
 #include <iostream>
 #include <string>
@@ -25,26 +25,6 @@ int Menu::vazio(Automato *automato) const
 
 void Menu::executar()
 {
-
-    // Linhas de teste de automatos por injeçao de informaçoes
-    // set<char> alfabeto = {'a', 'b', 'c', '0', '1', '2'};
-    // set<int> estados = {0, 1, 2, 3, 4, 5};
-    // map<pair<int, char>, int> transicoes = {
-    //     {{0, 'a'}, 1},
-    //     {{1, 'a'}, 2},
-    //     {{1, 'b'}, 1},
-    //     {{1, '0'}, 4},
-    //     {{2, 'c'}, 3},
-    //     {{3, 'b'}, 2},
-    //     {{3, '0'}, 5},
-    //     {{4, '0'}, 2},
-    //     {{4, '1'}, 5},
-    //     {{5, '2'}, 4},
-    // };
-    // set<int> finais = {0,2, 5};
-
-    // automato = new Automato(estados, alfabeto, transicoes, finais);
-
     int opcao;
 
     do
@@ -65,7 +45,8 @@ void Menu::executar()
         }
         case 2:
         {
-            // imprimirGramatica();
+            
+            imprimirGramatica();
             aguardarEntrada();
             break;
         }
@@ -125,16 +106,16 @@ void Menu::carregarAutomato()
     }
 }
 
-// void Menu::imprimirGramatica() const
-// {
-//     if (vazio(automato))
-//     {
-//         cout << "\nERRO: Nenhum automato carregado. Por favor, carregue um automato primeiro." << endl;
-//         return;
-//     }
+ void Menu::imprimirGramatica() const
+{
+    if (vazio(automato))
+    {
+        cout << "\nERRO: Nenhum automato carregado. Por favor, carregue um automato primeiro." << endl;
+        return;
+    }
 
-//     geradorGramatica::gerar(*automato);
-// }
+    geradorGramatica::gerar(*automato);
+}
 
 void Menu::verificarPalavra() const
 {
