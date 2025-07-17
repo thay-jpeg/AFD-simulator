@@ -19,9 +19,9 @@ void executar();
 
 private:
 
-Automato* m_automato; //ponteiro p/ automato
+Automato* automato; //ponteiro p/ automato
 
-int vazio(Automato * m_automato) const;
+int vazio(Automato * automato) const;
 void exibirOpcoes() const;
 void carregarAutomato();
 void imprimirGramatica() const;

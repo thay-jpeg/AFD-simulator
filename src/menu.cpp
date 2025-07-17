@@ -1,4 +1,4 @@
-//Implementação
+// Implementação
 
 #include "../include/menu.h"
 #include "../include/gerador_gramatica.h"
@@ -9,23 +9,22 @@
 
 using namespace std;
 
-Menu::Menu() : m_automato(nullptr) {}
+Menu::Menu() : automato(nullptr) {}
 
 Menu::~Menu()
 {
 
     cout << "Liberando memoria de automato carregado..." << endl;
-    delete m_automato;
+    delete automato;
 }
 
-int Menu::vazio(Automato *m_automato) const
+int Menu::vazio(Automato *automato) const
 {
-    return (m_automato == nullptr);
+    return (automato == nullptr);
 }
 
 void Menu::executar()
 {
-
     int opcao;
 
     do
@@ -46,6 +45,7 @@ void Menu::executar()
         }
         case 2:
         {
+            
             imprimirGramatica();
             aguardarEntrada();
             break;
@@ -58,11 +58,11 @@ void Menu::executar()
         }
         case 0:
         {
-            cout << "\nObrigado(a) por utilizar o simulador! Saindo..." << endl;
+            cout << "\nObrigado(a) por utilizar o simulador!" << endl;
             break;
         }
         default:
-            cout << "\nOpcao invalida, tente novamente!" << endl;
+            cout << "\nOpcao invalida, tente novamente." << endl;
             break;
         }
     } while (opcao != 0);
@@ -70,8 +70,7 @@ void Menu::executar()
 
 void Menu::exibirOpcoes() const
 {
-
-    cout << string(50, '\n'); //limpar tela
+    cout << endl;
     cout << "===========================================================" << endl;
     cout << "               AUTOMATO FINITO DETERMINISTICO          " << endl;
     cout << "===========================================================" << endl;
@@ -87,43 +86,41 @@ void Menu::exibirOpcoes() const
 void Menu::carregarAutomato()
 {
 
-    cout << "\nDigite o nome do arquivo .txt de definicao do automato: ";
+    cout << "\nDigite o nome do arquivo .txt de definicao do automato (deve estar na pasta 'example'): ";
     string nome;
     getline(cin, nome);
+    cout << endl;
 
     // antes de carregar um novo, libera o antigo
-    if (!vazio(m_automato))
+    if (!vazio(automato))
     {
-        delete m_automato;
-        m_automato = nullptr;
+        delete automato;
+        automato = nullptr;
     }
 
-    m_automato = leitorAutomato::lerArquivo(nome);
+    automato = leitorAutomato::lerArquivo(nome);
 
-    if (!vazio(m_automato))
+    if (!vazio(automato))
     {
-        cout << "Automato carregado com sucesso do arquivo '" << nome << ".txt!'" << endl;
-    }
-    else
-    {
-        cout << "ERRO: Nao foi possivel carregar o arquivo do automato." << endl;
+        cout << "Automato carregado com sucesso do arquivo '" << nome << "'!" << endl;
     }
 }
 
-void Menu::imprimirGramatica() const
+ void Menu::imprimirGramatica() const
 {
-    if (vazio(m_automato))
+    if (vazio(automato))
     {
         cout << "\nERRO: Nenhum automato carregado. Por favor, carregue um automato primeiro." << endl;
         return;
     }
 
-    geradorGramatica::gerar(*m_automato);
+    geradorGramatica::gerar(*automato);
 }
 
-void Menu::verificarPalavra() const {
-    
-    if (vazio(m_automato))
+void Menu::verificarPalavra() const
+{
+
+    if (vazio(automato))
     {
         cout << "\nERRO: Nenhum automato carregado. Por favor, carregue um automato primeiro." << endl;
         return;
@@ -132,8 +129,9 @@ void Menu::verificarPalavra() const {
     cout << "\nDigite a palavra a ser verificada (use @ para palavra vazia):" << endl;
     string palavra;
     getline(cin, palavra);
+    cout << endl;
 
-    m_automato->processarCadeia(palavra);
+    automato->processarCadeia(palavra);
 }
 
 void Menu::aguardarEntrada() const
