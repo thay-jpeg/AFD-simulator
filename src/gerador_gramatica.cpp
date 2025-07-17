@@ -47,7 +47,7 @@ void geradorGramatica::gerar(const Automato &automato) {
             }
         }
 
-        // add a prroducao da palavra vazia "@" se o estado for final
+        // add a producao da palavra vazia "@" se o estado for final
         if (estadosFinais.count(estado) > 0) {
             producoes[simboloOrigem].push_back("@");
         }
