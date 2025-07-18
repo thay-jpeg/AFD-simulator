@@ -2,22 +2,44 @@
 #define AUTOMATO_H_
 #include <iostream>
 #include <string>
-#include <set> // p/ armazenar conjuntos, em ordem crescente e sem elementos duplicados
-#include <map> // fará mapeamento de transições de cada estado, armazena pares de chave-valor
+#include <set> 
+#include <map>
 #include <utility>
 
 using namespace std;
+
+/**
+ * @brief Classe que representa um Autômato Finito Determinístico (AFD).
+ */
 class Automato{
 private:
     set<int> estados;
     set<char> alfabeto;
-    map<pair<int, char>, int> transicoes; // mapeia (estado_atual, simbolo) -> estado_destino. ex: (q0, a) = q1
+    map<pair<int, char>, int> transicoes;
     int estadoInicial;
     set<int> estadosFinais;
 
+    /**
+     * @brief Verifica se um estado é final.
+     * 
+     * @param estado Estado a ser verificado.
+     * 
+     * @return true se for estado final, false caso contrário.
+     */
     bool ehEstadoFinal(int estado) const;
 
 public:
+
+    /**
+     * @brief Construtor do autômato.
+     * 
+     * @param estados Conjunto de estados.
+     * @param alfabeto Alfabeto do autômato.
+     * @param transicoes Mapa de transições.
+     * @param estadosFinais Conjunto de estados finais.
+     * 
+     * @note O estado inicial é assumido como sendo sempre 0.
+     */
     Automato(
         const set<int> &estados,                     // p/ armazenar o conjunto dos numeros dos estados, ex: 1 de q1
         const set<char> &alfabeto,                   // para armazenar o alfabeto
@@ -25,15 +47,34 @@ public:
         const set<int> &estadosFinais                // p/ representar conjunto dos estados finais
     );
 
-    // processa uma cadeia de entrada e determina se ela é aceita pelo autômato.
+    /**
+     * @brief Processa uma cadeia de entrada e informa se ela é aceita.
+     * 
+     * @param cadeia Cadeia a ser verificada. Use "@" para representar cadeia vazia.
+     * 
+     * @return true se for aceita pelo autômato, false caso contrário.
+     */
     bool processarCadeia(const string &cadeia);
 
     // getters
-    const set<int> &getEstados() const;
+    /**
+    * @brief Retorna o conjunto de estados.
+    */
+    const set<int> &getEstados() const; 
+
+    /**
+    * @brief Retorna o conjunto de estados finais.
+    */
     const set<int> &getEstadosFinais() const;
+    
+    /**
+    * @brief Retorna o mapa de transições.
+    */
     const map<pair<int, char>, int> &getTransicoes() const;
 
-    // destrutor
+    /**
+     * @brief Destrutor do autômato.
+     */
     ~Automato();
 };
 
