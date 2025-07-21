@@ -37,17 +37,11 @@ public:
      * @param nome O nome do arquivo a ser lido. O caminho "example/" será pré-fixado e a extensão ".txt" será adicionada se não estiver presente.
      *
      * @pre
-     * 1. O arquivo especificado por `nome` deve existir no diretório "example/".
-     * 2. O conteúdo do arquivo deve seguir um formato estrito:
-     * - Linha 1: Definição do alfabeto. Ex: "alfabeto={a,b,c}"
-     * - Linha 2: Definição dos estados. Ex: "estados={q0,q1,q2}"
-     * - Linha 3: Definição dos estados finais. Ex: "finais={q2}"
-     * - Linhas subsequentes: Definições de transições. Ex: "(q0,a)=q1"
+     * O arquivo especificado deve existir no diretório "example/".
      *
      * @post
      * 1. Se a leitura e a análise do arquivo forem bem-sucedidas, um objeto `Automato` é alocado na memória heap e seu ponteiro é retornado.
-     * 2. Se o arquivo não puder ser aberto ou contiver erros de formatação, uma mensagem de erro será impressa no console (`cout` ou `cerr`) e a função retornará `nullptr`.
-     *
+     * 2. Se o arquivo não puder ser aberto ou contiver erros de formatação, uma mensagem de erro será impressa no console.
      * @return Um ponteiro para um novo objeto `Automato` em caso de sucesso, ou `nullptr` em caso de falha.
      */
     static Automato *lerArquivo(const string &nome);
